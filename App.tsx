@@ -64,6 +64,7 @@ const App: React.FC = () => {
   // Voice Call State
   const [isVoiceActive, setIsVoiceActive] = useState(false);
   const [voiceStatus, setVoiceStatus] = useState<'connecting' | 'connected' | 'error'>('connecting');
+  const [voiceErrorMsg, setVoiceErrorMsg] = useState<string>('');
   const liveServiceRef = useRef<LiveService | null>(null);
 
   // Responsive check
@@ -98,6 +99,7 @@ const App: React.FC = () => {
 
       setIsVoiceActive(true);
       setVoiceStatus('connecting');
+      setVoiceErrorMsg('');
 
       const service = new LiveService();
       liveServiceRef.current = service;
@@ -110,14 +112,20 @@ const App: React.FC = () => {
           },
           (err) => {
               // On Error
+              console.error("Voice connection error:", err);
               setVoiceStatus('error');
+              setVoiceErrorMsg(err.message || "Unknown error");
+              // Auto close after delay
               setTimeout(() => {
                   setIsVoiceActive(false);
-              }, 2000);
+              }, 3500);
           }
       );
       
-      setVoiceStatus('connected');
+      // If no error immediately, assume connected (optimistic)
+      if (voiceStatus !== 'error') {
+          setVoiceStatus('connected');
+      }
   };
 
   const handleVoiceHangup = async () => {
@@ -253,6 +261,7 @@ const App: React.FC = () => {
                     contact={USERS[session.contactId]}
                     onHangup={handleVoiceHangup}
                     status={voiceStatus}
+                    errorMessage={voiceErrorMsg}
                 />
             );
         }
@@ -332,6 +341,7 @@ const App: React.FC = () => {
                 contact={USERS[activeSession.contactId]}
                 onHangup={handleVoiceHangup}
                 status={voiceStatus}
+                errorMessage={voiceErrorMsg}
             />
         )}
 

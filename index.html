@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="https://picsum.photos/id/64/192/192" />
 
     <title>Chat App</title>
-    <!-- Tailwind via CDN for simplicity, though npm install is better for prod -->
+    <!-- Tailwind via CDN for simplicity. In production, using PostCSS is better but this works for drop-in usage. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -51,7 +51,7 @@
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
     "react": "https://aistudiocdn.com/react@^19.2.1",

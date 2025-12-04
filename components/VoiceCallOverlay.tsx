@@ -7,9 +7,10 @@ interface VoiceCallOverlayProps {
   contact: User;
   onHangup: () => void;
   status: 'connecting' | 'connected' | 'error';
+  errorMessage?: string;
 }
 
-const VoiceCallOverlay: React.FC<VoiceCallOverlayProps> = ({ contact, onHangup, status }) => {
+const VoiceCallOverlay: React.FC<VoiceCallOverlayProps> = ({ contact, onHangup, status, errorMessage }) => {
   return (
     <div className="fixed inset-0 z-50 bg-gray-900/95 backdrop-blur-sm flex flex-col items-center justify-between py-20 animate-fade-in-up text-white">
       <div className="flex flex-col items-center space-y-6">
@@ -26,10 +27,14 @@ const VoiceCallOverlay: React.FC<VoiceCallOverlayProps> = ({ contact, onHangup, 
             <Avatar src={contact.avatar} alt={contact.name} size="lg" shape="circle" />
         </div>
 
-        <div className="text-gray-400 text-sm font-medium">
+        <div className="text-gray-400 text-sm font-medium flex flex-col items-center gap-2">
             {status === 'connecting' && 'Connecting...'}
             {status === 'connected' && 'Voice Connected'}
-            {status === 'error' && 'Connection Failed'}
+            {status === 'error' && (
+                <span className="text-red-400 bg-red-900/20 px-4 py-2 rounded-lg text-center max-w-[80%]">
+                    {errorMessage || 'Connection Failed'}
+                </span>
+            )}
         </div>
       </div>
 
