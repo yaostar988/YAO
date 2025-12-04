@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="https://picsum.photos/id/64/192/192" />
 
     <title>Chat App</title>
-    <!-- Tailwind via CDN for simplicity. In production, using PostCSS is better but this works for drop-in usage. -->
+    <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -51,18 +51,7 @@
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-    "vite": "https://aistudiocdn.com/vite@^7.2.6",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
-  }
-}
-</script>
+    <!-- CRITICAL FIX: Deleted the <script type="importmap"> block here -->
 </head>
   <body class="bg-app-bg h-screen w-screen overflow-hidden text-app-text-main select-none">
     <div id="root" class="h-full w-full"></div>
