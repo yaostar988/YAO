@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     
+    <!-- FIX: Allow unsafe-eval to solve the CSP error -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
+
     <!-- iOS PWA Configuration -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -51,7 +54,6 @@
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
     </style>
-    <!-- CRITICAL FIX: Deleted the <script type="importmap"> block here -->
 </head>
   <body class="bg-app-bg h-screen w-screen overflow-hidden text-app-text-main select-none">
     <div id="root" class="h-full w-full"></div>
